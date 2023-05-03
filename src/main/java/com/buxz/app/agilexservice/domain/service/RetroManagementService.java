@@ -26,10 +26,16 @@ public class RetroManagementService implements RetroManagementUseCase {
 
     @Override
     public DomainRetroRequest createNewRetroBoard(DomainRetroRequest retroRequest) {
-        log.info("CreateNewRetroBoard: Creating a new retro board, date : {}", LocalDateTime.now());
-        retroRequest.setStatus(StatusEnum.CREATED);
-        retroRequest.setDateCreated(LocalDate.now());
-        return mongoAdapter.createNewRetroBoard(retroRequest);
+        log.info("RetroManagementService#createNewRetroBoard: Creating a new retro board, date : {}", LocalDateTime.now());
+
+        DomainRetroRequest domainRetroRequest = DomainRetroRequest.builder()
+                .id(UUID.randomUUID())
+                .boardCreator(retroRequest.getBoardCreator())
+                .retroTitle(retroRequest.getRetroTitle())
+                .dateCreated(LocalDateTime.now())
+                .status(StatusEnum.CREATED)
+                .build();
+        return mongoAdapter.createNewRetroBoard(domainRetroRequest);
     }
 
     @Override

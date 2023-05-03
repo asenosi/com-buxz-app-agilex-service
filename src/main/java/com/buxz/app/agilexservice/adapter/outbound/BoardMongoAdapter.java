@@ -22,7 +22,8 @@ public class BoardMongoAdapter {
     }
 
     public DomainRetroRequest createNewRetroBoard(final DomainRetroRequest retroRequest) {
-        log.info("CreateNewRetroBoard: Persisting the new board to the database");
+        log.info("CreateNewRetroBoard: Persisting the new board to the database: {}, {}, {}",
+                retroRequest.getRetroTitle(), retroRequest.getBoardCreator(), retroRequest.getDateCreated());
 
         OutboundRetroBoard outboundRetroBoard = requestMapper.mapToOutbound(retroRequest);
         boardRepository.save(outboundRetroBoard);
