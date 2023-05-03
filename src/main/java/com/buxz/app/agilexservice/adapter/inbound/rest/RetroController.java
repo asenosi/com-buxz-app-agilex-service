@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -58,5 +59,10 @@ public class RetroController {
                 );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<RestRetroRequest> getRetroSessionById(@PathVariable("id") UUID id) {
+        Optional<RestRetroRequest> retroSession = retroManagementUseCase.retrieveRetroSessionById(id).map(requestMapper::mapFromDomainRequest);
+        return retroSession.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 
 }

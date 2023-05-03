@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -29,6 +30,7 @@ public class RetroManagementService implements RetroManagementUseCase {
 
         DomainRetroRequest domainRetroRequest = DomainRetroRequest.builder()
                 .id(UUID.randomUUID())
+                .retroId(UUID.randomUUID())
                 .boardCreator(retroRequest.getBoardCreator())
                 .retroTitle(retroRequest.getRetroTitle())
                 .retroDescription(retroRequest.getRetroDescription())
@@ -50,8 +52,9 @@ public class RetroManagementService implements RetroManagementUseCase {
     }
 
     @Override
-    public DomainRetroRequest retrieveBoardByRetroId(UUID id) {
-        return null;
+    public Optional<DomainRetroRequest> retrieveRetroSessionById(UUID id) {
+        log.info("RetroManagementService#retrieveRetroSessionById: Retrieve a retrospective session by id: {} ", id);
+        return mongoAdapter.findRetroSessionById(id);
     }
 
     @Override

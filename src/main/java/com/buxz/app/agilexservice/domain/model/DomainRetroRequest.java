@@ -15,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DomainRetroRequest {
     UUID id;
+    UUID retroId;
     String retroTitle;
     private String retroDescription;
     String boardCreator;

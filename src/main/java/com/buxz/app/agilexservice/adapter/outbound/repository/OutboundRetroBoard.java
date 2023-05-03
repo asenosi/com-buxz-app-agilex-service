@@ -19,6 +19,7 @@ import java.util.UUID;
 public class OutboundRetroBoard {
     @Id
     UUID id;
+    UUID retroId;
     String retroTitle;
     String retroDescription;
     String boardCreator;
