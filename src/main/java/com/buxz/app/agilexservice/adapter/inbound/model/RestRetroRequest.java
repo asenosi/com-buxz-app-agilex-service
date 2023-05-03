@@ -10,4 +10,6 @@ public class RestRetroRequest {
     String retroTitle;
     String boardCreator;
     String retroDescription;
+    LocalDateTime dateCreated;
+    StatusEnum status;
 }

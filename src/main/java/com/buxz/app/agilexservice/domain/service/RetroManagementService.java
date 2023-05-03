@@ -8,9 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -40,12 +39,13 @@ public class RetroManagementService implements RetroManagementUseCase {
     }
 
     @Override
-    public Collection<DomainRetroRequest> retrieveAllBoards() {
-        return null;
+    public List<DomainRetroRequest> retrieveAllBoards() {
+        log.info("RetroManagementService#retrieveAllBoards: Retrieve a list of all the retrospective sessions");
+        return mongoAdapter.retrieveAllRetroSessions();
     }
 
     @Override
-    public Collection<DomainRetroRequest> retrieveBoardByStatus(StatusEnum status) {
+    public List<DomainRetroRequest> retrieveBoardByStatus(StatusEnum status) {
         return null;
     }
 

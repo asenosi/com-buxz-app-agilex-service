@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 public class BoardMongoAdapter {
@@ -31,4 +34,12 @@ public class BoardMongoAdapter {
         return requestMapper.mapToDomain(outboundRetroBoard);
     }
 
+    public List<DomainRetroRequest> retrieveAllRetroSessions() {
+        log.info("BoardMongoAdapter#retriveAllRetroSessions: Retrieve all retro sessions from MongoDb");
+        List<OutboundRetroBoard> retroBoardList = boardRepository.findAll();
+        return retroBoardList
+                .stream()
+                .map(requestMapper::mapToDomain)
+                .collect(Collectors.toList());
+    }
 }

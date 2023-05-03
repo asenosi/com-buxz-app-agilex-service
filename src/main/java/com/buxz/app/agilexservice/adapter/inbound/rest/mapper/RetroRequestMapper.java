@@ -13,6 +13,7 @@ public interface RetroRequestMapper {
 
     RetroRequestMapper MAPPER = Mappers.getMapper(RetroRequestMapper.class);
     @Mapping(target = "retroDescription", source = "retroDescription")
+    @Mapping(target = "dateCreated", source = "dateCreated")
     RestRetroRequest mapFromDomainRequest(DomainRetroRequest domainRequest);
 
     @Mapping(target = "retroDescription", source = "retroDescription")
