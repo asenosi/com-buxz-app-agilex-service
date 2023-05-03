@@ -59,7 +59,14 @@ public class RetroManagementService implements RetroManagementUseCase {
     }
 
     @Override
-    public void updateRetroBoardStatus(UUID retroId, StatusEnum status) {
-
+    public boolean updateRetroBoardStatus(UUID retroId, StatusEnum status) {
+        Optional<DomainRetroRequest> retroSession = mongoAdapter.findRetroSessionById(retroId);
+        if (retroSession.isPresent()) {
+            retroSession.get().setStatus(status);
+            mongoAdapter.updateStatusOfRetroBoard(retroSession.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 }

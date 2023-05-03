@@ -55,4 +55,10 @@ public class BoardMongoAdapter {
         log.info("BoardMongoAdapter#retrieveAllRetroSessionByStatus: Retrieve retro session by id from MongoDb");
         return boardRepository.findAllByStatus(status);
     }
+
+    public void updateStatusOfRetroBoard(DomainRetroRequest retroSession) {
+        log.info("BoardMongoAdapter#updateStatusOfRetroBoard: Update the status of a retro board on the MongoDb");
+        OutboundRetroBoard outboundRetroBoard = requestMapper.mapToOutbound(retroSession);
+        boardRepository.save(outboundRetroBoard);
+    }
 }

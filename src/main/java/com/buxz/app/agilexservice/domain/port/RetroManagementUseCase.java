@@ -19,7 +19,7 @@ public interface RetroManagementUseCase {
 
     Optional<DomainRetroRequest> retrieveRetroSessionById(UUID id);
 
-    void updateRetroBoardStatus(UUID retroId, StatusEnum status);
+    boolean updateRetroBoardStatus(UUID retroId, StatusEnum status);
 
 
 }

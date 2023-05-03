@@ -4,7 +4,6 @@ import com.buxz.app.agilexservice.adapter.inbound.model.RestRetroRequest;
 import com.buxz.app.agilexservice.adapter.inbound.rest.mapper.RetroRequestMapper;
 import com.buxz.app.agilexservice.domain.StatusEnum;
 import com.buxz.app.agilexservice.domain.port.RetroManagementUseCase;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,6 +76,17 @@ public class RetroController {
                                 .map(requestMapper::mapFromDomainRequest)
                                 .collect(Collectors.toList())
                 );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateRetroBoardStatus(@PathVariable("id") UUID id, @RequestBody String newStatus) {
+        //TODO change newStatus from being RequestBody
+        boolean updated = retroManagementUseCase.updateRetroBoardStatus(id, StatusEnum.valueOf(newStatus));
+        if (updated) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 }
