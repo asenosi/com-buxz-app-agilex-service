@@ -3,6 +3,7 @@ package com.buxz.app.agilexservice.adapter.outbound;
 import com.buxz.app.agilexservice.adapter.outbound.mapper.OutBoundRequestMapper;
 import com.buxz.app.agilexservice.adapter.outbound.repository.OutboundRetroBoard;
 import com.buxz.app.agilexservice.adapter.outbound.repository.RetroBoardRepository;
+import com.buxz.app.agilexservice.domain.StatusEnum;
 import com.buxz.app.agilexservice.domain.model.DomainRetroRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class BoardMongoAdapter {
     public Optional<DomainRetroRequest> findRetroSessionById(UUID id) {
         log.info("BoardMongoAdapter#findRetroSessionById: Retrieve retro session by id from MongoDb");
         return boardRepository.findByRetroId(id).map(requestMapper::mapToDomain);
+    }
+
+    public List<DomainRetroRequest> retrieveAllRetroSessionByStatus(StatusEnum status) {
+        log.info("BoardMongoAdapter#retrieveAllRetroSessionByStatus: Retrieve retro session by id from MongoDb");
+        return boardRepository.findAllByStatus(status);
     }
 }

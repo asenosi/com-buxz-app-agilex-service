@@ -15,7 +15,7 @@ public interface RetroManagementUseCase {
 
     List<DomainRetroRequest> retrieveAllBoards();
 
-    Collection<DomainRetroRequest> retrieveBoardByStatus(StatusEnum status);
+    List<DomainRetroRequest> retrieveBoardByStatus(StatusEnum status);
 
     Optional<DomainRetroRequest> retrieveRetroSessionById(UUID id);
 

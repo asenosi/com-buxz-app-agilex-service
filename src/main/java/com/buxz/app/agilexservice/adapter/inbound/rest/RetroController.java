@@ -2,6 +2,7 @@ package com.buxz.app.agilexservice.adapter.inbound.rest;
 
 import com.buxz.app.agilexservice.adapter.inbound.model.RestRetroRequest;
 import com.buxz.app.agilexservice.adapter.inbound.rest.mapper.RetroRequestMapper;
+import com.buxz.app.agilexservice.domain.StatusEnum;
 import com.buxz.app.agilexservice.domain.port.RetroManagementUseCase;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +64,19 @@ public class RetroController {
     public ResponseEntity<RestRetroRequest> getRetroSessionById(@PathVariable("id") UUID id) {
         Optional<RestRetroRequest> retroSession = retroManagementUseCase.retrieveRetroSessionById(id).map(requestMapper::mapFromDomainRequest);
         return retroSession.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<RestRetroRequest>> getAllRetroSessionsByStatus(@PathVariable("status") String status) {
+        log.info("RetrieveAllRetroBoards: Retrieve a list of all the retrospective sessions by status: {}", status);
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(
+                        retroManagementUseCase.retrieveBoardByStatus(StatusEnum.valueOf(status))
+                                .stream()
+                                .map(requestMapper::mapFromDomainRequest)
+                                .collect(Collectors.toList())
+                );
     }
 
 }

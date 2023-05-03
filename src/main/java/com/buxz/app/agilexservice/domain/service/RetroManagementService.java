@@ -48,7 +48,8 @@ public class RetroManagementService implements RetroManagementUseCase {
 
     @Override
     public List<DomainRetroRequest> retrieveBoardByStatus(StatusEnum status) {
-        return null;
+        log.info("RetroManagementService#retrieveBoardByStatus: Retrieve all retrospective sessions by status: {} ", status);
+        return mongoAdapter.retrieveAllRetroSessionByStatus(status);
     }
 
     @Override
