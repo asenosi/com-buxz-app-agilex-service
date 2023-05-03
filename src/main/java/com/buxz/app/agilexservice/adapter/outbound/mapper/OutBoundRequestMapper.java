@@ -13,6 +13,11 @@ public interface OutBoundRequestMapper {
     OutBoundRequestMapper MAPPER = Mappers.getMapper(OutBoundRequestMapper.class);
     @Mapping(target = "dateCreated", source = "dateCreated")
     @Mapping(target = "boardCreator", source = "boardCreator")
+    @Mapping(target = "retroDescription", source = "retroDescription")
     OutboundRetroBoard mapToOutbound(DomainRetroRequest domainRequest);
+
+    @Mapping(target = "dateCreated", source = "dateCreated")
+    @Mapping(target = "boardCreator", source = "boardCreator")
+    @Mapping(target = "retroDescription", source = "retroDescription")
     DomainRetroRequest mapToDomain(OutboundRetroBoard outboundRetroBoard);
 }

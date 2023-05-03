@@ -32,6 +32,7 @@ public class RetroManagementService implements RetroManagementUseCase {
                 .id(UUID.randomUUID())
                 .boardCreator(retroRequest.getBoardCreator())
                 .retroTitle(retroRequest.getRetroTitle())
+                .retroDescription(retroRequest.getRetroDescription())
                 .dateCreated(LocalDateTime.now())
                 .status(StatusEnum.CREATED)
                 .build();

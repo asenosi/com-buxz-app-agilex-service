@@ -20,8 +20,9 @@ public class OutboundRetroBoard {
     @Id
     UUID id;
     String retroTitle;
+    String retroDescription;
     String boardCreator;
     StatusEnum status;
     LocalDateTime dateCreated;
-    String updatedDate;
+    LocalDateTime dateUpdated;
 }
